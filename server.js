@@ -15,7 +15,7 @@ const staticDir = process.env.DEV ? "./client/public" : "./client/build";
 app.use(express.static(staticDir));
 
 // allows for server to evaluate data as a json Obj
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 //from Schema Validation slidedeck- pass {userNewUrlParser: true, useUnifiedTopology: true} as a 2nd argument to the connect method to avoid depreciation warnings
 const mongoose = require('mongoose');
@@ -28,14 +28,14 @@ mongoose.connect("mongodb://localhost:27017/chatRoom", {
 const database = mongoose.connection;
 
 // this is creating the schema (in mongoose) to describe the components of the chat message schema
- 
-  const messageSchema = new mongoose.Schema ({
-    room: String,
-    when: Date(),
-    username: String,
-    body: String,
-  })
-  const Message = mongoose.model('Message', messageSchema)
+
+const messageSchema = new mongoose.Schema({
+  room: { type: String },
+  when: { type: Date, default: Date.now() },
+  username: { type: String },
+  message: { type: String },
+})
+const Message = mongoose.model('Message', messageSchema)
 
 
 
@@ -46,13 +46,15 @@ const database = mongoose.connection;
 database.on('error', console.error.bind(console, 'connection error:'))
 
 // obtains the added 'author name' from the 'submit message form on the home-page ... this should set author name to the body of request
-app.post('/components/chat', async (req, res) => {
-  const userData = {
-     When: Date.now(),
+app.post('/send', async (req, res) => {
+  const post = new Message({
+    when: Date.now(),
     username: req.body.username,
-    body: req.body.message
-}
-new userData
+    message: req.body.message
+  }
+  )
+  await post.save()
+  res.redirect("/")
 
 });
 
@@ -62,26 +64,26 @@ new userData
 // maybe should add 'room' so like {author, room} so that their message will appear in THAT room
 
 // app.post('/room/:roomID/message', async (req, res) => {   this is fucked
-  // getting properties from the request body
-  // let author = req.body.author;
-  // let chatBody = req.body.chatBody;
-  // make a new 'Date' obj & assign to 'date' variable (unless this date is a constructor- check)
-  // let when = new Date();
-  //pull the roomID for the specific 'room' that the user is posting a message into & assign it to roomID
-  // let roomID = req.params.roomID;
+// getting properties from the request body
+// let author = req.body.author;
+// let chatBody = req.body.chatBody;
+// make a new 'Date' obj & assign to 'date' variable (unless this date is a constructor- check)
+// let when = new Date();
+//pull the roomID for the specific 'room' that the user is posting a message into & assign it to roomID
+// let roomID = req.params.roomID;
 
-  //at the same time, we can make sure that the body of the message does not exceed 500 characters, if it does- send error message
-  // if(msgBody > 500) {
-    // return res.sendStatus(403);
-  // }
-  
+//at the same time, we can make sure that the body of the message does not exceed 500 characters, if it does- send error message
+// if(msgBody > 500) {
+// return res.sendStatus(403);
+// }
+
 // });
 
 //const messageResponse = new Message({ dont need it 
 //  author: author,
-  //chatbody: chatbody,
-  //when: new Date(),
-  //roomID: roomID
+//chatbody: chatbody,
+//when: new Date(),
+//roomID: roomID
 //});
 
 //await messageResponse.save() its berokennnn
@@ -102,7 +104,6 @@ app.get('/room/:roomID/messages', async (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`listening on port: ' + ${port}`) 
+  console.log(`listening on port: ' + ${port}`)
 })
 
-chat();
