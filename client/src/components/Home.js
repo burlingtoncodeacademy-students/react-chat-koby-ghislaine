@@ -12,7 +12,7 @@ export default function Home() {
           <h3>Home Room Chat</h3>
           <p id="main">Space for messages to display </p>
         </div>
-
+{/* link to the other rooms */}
         <div id="rooms">
           <h3> All Available Chat Rooms </h3>
 
@@ -30,7 +30,7 @@ export default function Home() {
         </div>
       </div>
       
-      \* FORM *\
+      \* FORM to bring in the chatmessages and the usernames in to *\
       <div id="form-container">
         <form method="POST">
           <input id="username"

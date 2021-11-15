@@ -45,7 +45,7 @@ const Message = mongoose.model('Message', messageSchema)
 // setting up an error msg (schema validation slide-deck)
 database.on('error', console.error.bind(console, 'connection error:'))
 
-// obtains the added 'author name' from the 'submit message form on the home-page ... this should set author name to the body of request
+// takes username and message entered on the page and logs them into the mongo databasae
 app.post('/send', async (req, res) => {
   const post = new Message({
     when: Date.now(),
@@ -61,36 +61,7 @@ app.post('/send', async (req, res) => {
 
 
 
-// maybe should add 'room' so like {author, room} so that their message will appear in THAT room
 
-// app.post('/room/:roomID/message', async (req, res) => {   this is fucked
-// getting properties from the request body
-// let author = req.body.author;
-// let chatBody = req.body.chatBody;
-// make a new 'Date' obj & assign to 'date' variable (unless this date is a constructor- check)
-// let when = new Date();
-//pull the roomID for the specific 'room' that the user is posting a message into & assign it to roomID
-// let roomID = req.params.roomID;
-
-//at the same time, we can make sure that the body of the message does not exceed 500 characters, if it does- send error message
-// if(msgBody > 500) {
-// return res.sendStatus(403);
-// }
-
-// });
-
-//const messageResponse = new Message({ dont need it 
-//  author: author,
-//chatbody: chatbody,
-//when: new Date(),
-//roomID: roomID
-//});
-
-//await messageResponse.save() its berokennnn
-// sends the user like a 'success' message, BUT doesn't reload the page
-//res.status(204).send()
-
-// pulling up all messages from a certain room
 app.get('/room/:roomID/messages', async (req, res) => {
   let allMessages = await Message.find({
     roomID: req.params.roomID
@@ -102,7 +73,7 @@ app.get('/room/:roomID/messages', async (req, res) => {
 
 
 
-
+// logging the port the page is open on
 app.listen(port, () => {
   console.log(`listening on port: ' + ${port}`)
 })
