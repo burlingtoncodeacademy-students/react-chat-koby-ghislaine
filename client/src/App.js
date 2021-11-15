@@ -26,7 +26,7 @@ function App() {
 
         <Route
         path = "/blight-town-room"
-        element = {<BlightTownRoom />}
+        element = {<BlightTownRoom/>}
         />
 
         <Route
