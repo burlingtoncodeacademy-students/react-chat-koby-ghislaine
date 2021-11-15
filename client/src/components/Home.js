@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import "./Home.css";
+//import "./Home.css";
 
 // Home Page Function
-function Home(props) {
+export default function Home() {
   return (
     <nav id="main-navigation">
-      <h1 id="welcome-message">WELCOME TO CHAT! </h1>
+      <h1 id="welcome-message">Behold, the chat room! </h1>
       <div id="home-room-wrapper">
         <div id="home-chat">
           <h3>Home Room Chat</h3>
@@ -35,21 +35,25 @@ function Home(props) {
         <form method="POST">
           <input id="username"
           type="text"
+          name="username"
           placeholder="Enter your username" />
 
           <input
-            id="message-body"
+            id="message"
             type="text"
             placeholder="Enter your message here"
+            name="message"
           />
 
           <input
           id = "usernameButton"
           type = "submit"
-          formAction = "send"/>
+          formAction = "/send"/>
           
         </form>
       </div>
     </nav>
   );
 }
+
+export default Home

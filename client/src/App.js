@@ -1,8 +1,8 @@
-// import css file for app.js
-import "./App.css";
-// react-router-dom imports
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import logo from './logo.svg';
+import './App.css';
+import './components/mainRoom'
+import MainRoom from './components/mainRoom';
+import { BrowserRouter, Router, Link, Route, Routes } from "react-router-dom";
 // Room Component Imports
 import Home from "./components/Home.js";
 import BlightTownRoom from "./components/BlightTownRoom.js"
