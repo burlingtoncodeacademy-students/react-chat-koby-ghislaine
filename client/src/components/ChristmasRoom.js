@@ -1,7 +1,7 @@
 // imports
 import React from "react";
 import { useState, useEffect } from "react";
-import ChristmasRoomNavigation from "./ChristmasRoomNavigation.js";
+import ChristmasRoomNavigation from "./NavChristmasRoom.js";
 
 // updating page for rainyDayRoom component
 export default function ChristmasRoom() {

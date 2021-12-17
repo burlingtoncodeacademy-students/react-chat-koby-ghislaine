@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import './components/mainRoom'
-import MainRoom from './components/mainRoom';
+import './components/room1'
+import MainRoom from './components/room1';
 import { BrowserRouter, Router, Link, Route, Routes } from "react-router-dom";
 // Room Component Imports
 import Home from "./components/Home.js";
-import BlightTownRoom from "./components/BlightTownRoom.js"
+import BlightRoom from "./components/BlightRoom.js"
 import ChristmasRoom from "./components/ChristmasRoom.js"
 import RainyDayRoom from "./components/RainyDayRoom.js"
 
@@ -26,7 +26,7 @@ function App() {
 
         <Route
         path = "/blight-town-room"
-        element = {<BlightTownRoom/>}
+        element = {<BlighRoom/>}
         />
 
         <Route
