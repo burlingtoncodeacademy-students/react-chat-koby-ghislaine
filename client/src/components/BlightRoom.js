@@ -43,11 +43,12 @@ export default function BlightRoom() {
 
   // renders page appearance 
   return (
+    <>
     <div className="room-wrapper">
       <div className="header">
         <h2>React-Chat App</h2>
       </div>
-      <NavBlightRoom />
+      <BlightRoomNav />
 
       <div className = "page-contents">
         <div className = "chat-area">
@@ -68,6 +69,7 @@ export default function BlightRoom() {
       </div>
 
     </div>
+    </>
   )
 };
 

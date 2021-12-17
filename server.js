@@ -43,8 +43,8 @@ const Message = mongoose.model("Message", messageSchema);
 // setting up an error msg (schema validation slide-deck)
 database.on("error", console.error.bind(console, "connection error:"));
 
-// obtains the added 'author name' from the 'submit message form on the home-page ... this should set author name to the body of request
-app.post("/send", async (req, res) => {
+// takes username and message entered on the page and logs them into the mongo databasae
+app.post('/send', async (req, res) => {
   const post = new Message({
     when: Date.now(),
     username: req.body.username,
@@ -54,13 +54,18 @@ app.post("/send", async (req, res) => {
   res.redirect("/");
 });
 
-// pulling up all messages from a certain room
-app.get("/room/:roomID/messages", async (req, res) => {
+
+
+
+
+app.get('/room/:roomID/messages', async (req, res) => {
   let allMessages = await Message.find({
     roomID: req.params.roomID,
   });
 });
 
+
+// logging the port the page is open on
 app.listen(port, () => {
   console.log(`listening on port: ' + ${port}`);
 });
